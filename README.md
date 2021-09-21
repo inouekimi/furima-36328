@@ -12,9 +12,8 @@
 | encrypted_password | string  | null: false               |
 | email              | string  | null: false, unique: true |
 <!-- unique: true = 一意性制約 = テーブル内で重複するデータを禁止する -->
-| birthday_year      | date    | null: false               |
-| birthday_month     | date    | null: false               |
-| birthday_day       | date    | null: false               |
+| birthday           | date    | null: false               |
+
 
 
 ### Association
@@ -67,18 +66,19 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipping_address
+- has_one :shipping_address
 
 ## shipping_addresses テーブル
 
-| Column         | Type       | Options     |
-| -------------- | ---------- | ----------- |
-| postal_code    | string     | null: false |
-| prefectures_id | integer    | null: false |
-| municipalities | string     | null: false |
-| address        | string     | null: false |
-| building_name  | string     |
-| telephone      | string     | null: false |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| postal_code      | string     | null: false                    |
+| shipping_area_id | integer    | null: false                    |
+| municipalities   | string     | null: false                    |
+| address          | string     | null: false                    |
+| building_name    | string     |
+| telephone        | string     | null: false                    |
+| purchase         | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :purchase
