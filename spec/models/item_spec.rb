@@ -65,10 +65,25 @@ RSpec.describe Item, type: :model do
         # Price please enter between ¥300 ~ ¥ 9,999,999
         # 上記をエラーメッセージで使いたければapp/models/item.rbのバリデーションに記述しないといけない
       end
-      it 'priceは半角数値以外では保存できない' do
+      it 'priceは全角では保存できない' do
         @item.price = '２０００'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'priceは英数字混合では保存できないこと' do
+        @item.price = '1one'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'priceは英字では保存できない' do
+        @item.price = 'one'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end
