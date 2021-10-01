@@ -64,7 +64,6 @@ GEM
     bcrypt (3.1.16)
 
     ast (2.4.2)
-
     bindex (0.8.1)
     bootsnap (1.8.1)
       msgpack (~> 1.0)
@@ -178,7 +177,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.1.1)
-<<<<<<< Updated upstream
+
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -199,8 +198,6 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
-<<<<<<< HEAD
-=======
     rexml (3.2.5)
     rubocop (1.21.0)
       parallel (~> 1.10)
@@ -214,11 +211,10 @@ GEM
     rubocop-ast (1.11.0)
       parser (>= 3.0.1.1)
     ruby-progressbar (1.11.0)
->>>>>>> Stashed changes
-=======
+
     ruby-vips (2.1.3)
       ffi (~> 1.12)
->>>>>>> adf7d64375c88925bde8672b3cc379d45b7cf411
+
     ruby_dep (1.5.0)
     rubyzip (2.3.2)
     sass (3.7.4)
@@ -254,6 +250,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
+
 
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -303,6 +300,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.0)
 
   rubocop
+
 
   sass-rails (~> 5)
   selenium-webdriver
