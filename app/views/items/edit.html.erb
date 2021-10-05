@@ -141,7 +141,11 @@ app/assets/stylesheets/items/new.css %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
+<<<<<<< Updated upstream
       <%=link_to 'もどる', "#", class:"back-btn" %>
+=======
+      <%=link_to 'もどる', item_path(@item.id), class:"back-btn" %>
+>>>>>>> Stashed changes
     </div>
     <%# /下部ボタン %>
   </div>
