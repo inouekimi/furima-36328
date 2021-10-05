@@ -2,15 +2,18 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # ログインしていないユーザーをログインぺージに促す
   # index,showアクションは除外される
+  before_action :set_item, only: [:edit, :show, :update]
   before_action :move_to_index, except: [:index, :show, :new, :create]
 
 
   def index
     @item = Item.all.order("created_at DESC")
   end
+
   def new
     @item = Item.new
   end
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -23,26 +26,31 @@ class ItemsController < ApplicationController
       # ビューのitem/newを表示する
     end
   end
+
   def show
-    @item = Item.find(params[:id])
   end
+
   def edit
-    @item = Item.find(params[:id])
   end
+
   def update
-    @item = Item.find(params[:id])
-    # @itemとエラーハンドリングの関係性が分からない
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
-      render :new
+      render :edit
     end
   end
   
   private
+
   def item_params
     params.require(:item).permit(:image, :name, :price, :shipping_charges_id, :category_id, :status_id, :explanation, :shipping_area_id, :days_to_id).merge(user_id: current_user.id)
   end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+  
   def move_to_index
     @item = Item.find(params[:id])
     unless @item.user.id == current_user.id
