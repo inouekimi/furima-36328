@@ -50,9 +50,8 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-  
+
   def move_to_index
-    @item = Item.find(params[:id])
     unless @item.user.id == current_user.id
           # 投稿者専用ページ == 投稿者(ログインユーザー)
           # 投稿者(ログインユーザー)が投稿者専用ページではないページに遷移しようとした時は
