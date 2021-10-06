@@ -40,6 +40,12 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
+  end
   
   private
 
@@ -52,6 +58,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
+    @item = Item.find(params[:id])
     unless @item.user.id == current_user.id
           # 投稿者専用ページ == 投稿者(ログインユーザー)
           # 投稿者(ログインユーザー)が投稿者専用ページではないページに遷移しようとした時は
