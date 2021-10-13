@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
-
+  before_action :authenticate_user!, only: :index
+  # ログインしていないユーザーをログインぺージに促す
+  # index,showアクションは除外される
   before_action :set_item, only: [:index, :create]
+  before_action :b, only: :index
 
   def index
     @purchase_shipping_address = PurchaseShippingAddress.new
@@ -38,6 +41,12 @@ class OrdersController < ApplicationController
       card: purchase_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def b
+    if @item.user.id != current_user.id && @item.purchase != nil || @item.user.id == current_user.id && @item.purchase != nil
+      redirect_to root_path
+    end
   end
 end
 
