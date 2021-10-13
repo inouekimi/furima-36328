@@ -4,10 +4,12 @@ class ItemsController < ApplicationController
   # index,showアクションは除外される
   before_action :set_item, only: [:edit, :show, :update]
   before_action :move_to_index, except: [:index, :show, :new, :create]
+  before_action :a, only: :edit
 
 
   def index
     @item = Item.all.order("created_at DESC")
+    
   end
 
   def new
@@ -58,10 +60,15 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:id])
-    unless @item.user.id == current_user.id
+    if @item.user.id != current_user.id
           # 投稿者専用ページ == 投稿者(ログインユーザー)
           # 投稿者(ログインユーザー)が投稿者専用ページではないページに遷移しようとした時は
+      redirect_to action: :index
+    end
+  end
+
+  def a
+    if @item.user.id == current_user.id && @item.purchase != nil
       redirect_to action: :index
     end
   end
