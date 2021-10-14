@@ -61,6 +61,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
+    @item = Item.find(params[:id])
     if @item.user.id != current_user.id
           # 出品者とログインユーザーが違った場合
           # 投稿者(ログインユーザー)が投稿者専用ページではないページに遷移しようとした時は

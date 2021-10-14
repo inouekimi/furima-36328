@@ -22,8 +22,6 @@ RSpec.describe PurchaseShippingAddress, type: :model do
       it 'building_nameがなくても購入できる' do
         @order.building_name = ''
         # 建物名が空の場合は
-        @order.valid?
-        # 建物名に対してバリデーションを掛けていないのでture = 建物名がなくても保存できる
         expect(@order).to be_valid
         # 正常系のテストコードではexpect(@order).to be_validと記述する
       end
