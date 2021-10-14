@@ -2,8 +2,8 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # ログインしていないユーザーをログインぺージに促す
   # index,showアクションは除外される
-  before_action :set_item, only: [:edit, :show, :update]
-  before_action :move_to_index, except: [:index, :show, :new, :create]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :destroy, :update]
  
   def index
     @item = Item.all.order("created_at DESC")
@@ -45,8 +45,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    @item.destroy
     redirect_to root_path
   end
   
@@ -61,7 +60,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:id])
     if @item.user.id != current_user.id
           # 出品者とログインユーザーが違った場合
           # 投稿者(ログインユーザー)が投稿者専用ページではないページに遷移しようとした時は
