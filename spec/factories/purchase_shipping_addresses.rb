@@ -10,5 +10,6 @@ FactoryBot.define do
     # user
     # item
     token {"tok_abcdefghijk00000000000000000"}
+    building_name {"abcマンション"}
   end
 end

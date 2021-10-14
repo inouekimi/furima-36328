@@ -3,10 +3,14 @@ class OrdersController < ApplicationController
   # ログインしていないユーザーをログインぺージに促す
   # index,showアクションは除外される
   before_action :set_item, only: [:index, :create]
-  before_action :b, only: :index
+  
 
   def index
     @purchase_shipping_address = PurchaseShippingAddress.new
+    if @item.user.id != current_user.id && @item.purchase != nil || @item.user.id == current_user.id && @item.purchase != nil
+      # 出品者とログインユーザーが違った場合且つ商品が売れている場合もしくは出品者とログインユーザーが同じ場合且つ商品が売れている場合
+      redirect_to root_path
+    end
   end
 
   def create
@@ -41,12 +45,6 @@ class OrdersController < ApplicationController
       card: purchase_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
-  end
-
-  def b
-    if @item.user.id != current_user.id && @item.purchase != nil || @item.user.id == current_user.id && @item.purchase != nil
-      redirect_to root_path
-    end
   end
 end
 
