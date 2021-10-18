@@ -7,8 +7,8 @@ class OrdersController < ApplicationController
 
   def index
     @purchase_shipping_address = PurchaseShippingAddress.new
-    if @item.user.id != current_user.id && @item.purchase != nil || @item.user.id == current_user.id && @item.purchase != nil
-      # 出品者とログインユーザーが違った場合且つ商品が売れている場合もしくは出品者とログインユーザーが同じ場合且つ商品が売れている場合
+    if @item.user.id != current_user.id && @item.purchase != nil || @item.user.id == current_user.id
+      # 出品者とログインユーザーが違った場合且つ商品が売れている場合もしくは出品者とログインユーザーが同じ場合
       redirect_to root_path
     end
   end

@@ -8,7 +8,7 @@ class Item < ApplicationRecord
 
   validates :name, :explanation, :image, presence: true
   validates  :price,  presence: true, numericality: { only_integer: true,
-    greater_than: 300, less_than: 9_999_999 },format: { with: /\A[0-9]+\z/
+    greater_than: 299, less_than: 10_000_000 },format: { with: /\A[0-9]+\z/
       # priceがないと保存できない。300~9999999の数字のみ保存可能。半角でしか保存できない。
   }
   
